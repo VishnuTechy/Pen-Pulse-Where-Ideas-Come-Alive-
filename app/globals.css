@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 body {
-  @apply bg-gray-50 text-gray-800;
+  @apply bg-gray-50 text-gray-900;
   font-family: 'Inter', sans-serif;
   font-size: 18px;       /* ⬅ bigger base */
   line-height: 1.7;      /* ⬅ more breathing space */

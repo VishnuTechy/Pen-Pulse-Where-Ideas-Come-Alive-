@@ -19,7 +19,7 @@ export default function Header() {
         </h1>
 
         {/* Nav */}
-        <nav className="space-x-6 flex items-center text-lg font-semibold text-gray-700 dark:text-gray-300">
+        <nav className="space-x-6 flex items-center text-lg font-semibold text-gray-900 dark:text-gray-100">
           <Link
             href="/"
             className="hover:text-blue-600 dark:hover:text-blue-400 transition"

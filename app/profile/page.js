@@ -52,7 +52,7 @@ export default function Profile() {
         className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6 mb-8 space-y-4"
       >
         <div>
-          <label className="block text-sm font-medium text-gray-600 dark:text-gray-300">Name</label>
+          <label className="block text-sm font-medium text-gray-900 dark:text-gray-100">Name</label>
           <input 
             value={name} 
             onChange={e=>setName(e.target.value)} 
@@ -61,11 +61,11 @@ export default function Profile() {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-600 dark:text-gray-300">Email</label>
+          <label className="block text-sm font-medium text-gray-900 dark:text-gray-100">Email</label>
           <input 
             value={email} 
             disabled 
-            className="w-full mt-1 px-4 py-2 border rounded-lg bg-gray-100 dark:bg-gray-700 dark:text-gray-400 cursor-not-allowed"
+            className="w-full mt-1 px-4 py-2 border rounded-lg bg-gray-100 dark:bg-gray-700 dark:text-gray-100 cursor-not-allowed"
           />
         </div>
 
@@ -78,13 +78,13 @@ export default function Profile() {
 
       {/* Password Card */}
       <div>
-        <h3 className="text-xl font-bold mb-4 text-gray-800 dark:text-gray-200">Change Password</h3>
+        <h3 className="text-xl font-bold mb-4 text-gray-900 dark:text-gray-100">Change Password</h3>
         <form 
           onSubmit={changePassword} 
           className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6 space-y-4"
         >
           <div>
-            <label className="block text-sm font-medium text-gray-600 dark:text-gray-300">Old Password</label>
+            <label className="block text-sm font-medium text-gray-900 dark:text-gray-100">Old Password</label>
             <input 
               type="password" 
               value={oldPass} 
@@ -94,7 +94,7 @@ export default function Profile() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-600 dark:text-gray-300">New Password</label>
+            <label className="block text-sm font-medium text-gray-900 dark:text-gray-100">New Password</label>
             <input 
               type="password" 
               value={newPass} 

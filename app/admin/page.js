@@ -81,7 +81,7 @@ export default function Admin() {
   if (!isAdmin) {
     return (
       <div className="p-6 min-h-screen bg-transparent">
-        <h2 className="text-2xl font-bold mb-4 text-gray-800 drop-shadow">
+        <h2 className="text-2xl font-bold mb-4 text-gray-900 drop-shadow">
           Admin
         </h2>
         {error && <p className="text-red-600">{error}</p>}
@@ -98,7 +98,7 @@ export default function Admin() {
       {/* Glassmorphism card */}
 {/* Glassmorphism card */}
 <div className="bg-white/80 dark:bg-gray-900/80 backdrop-blur-xl shadow-2xl rounded-3xl p-8 border border-white/30">
-  <h3 className="text-2xl font-bold mb-6 text-gray-800 dark:text-gray-100">
+  <h3 className="text-2xl font-bold mb-6 text-gray-900 dark:text-gray-100">
     Users
   </h3>
   <div className="divide-y divide-gray-200 dark:divide-gray-700">
@@ -146,7 +146,7 @@ export default function Admin() {
           </div>
         ) : (
           <>
-            <span className="text-lg text-gray-800 dark:text-gray-200 font-medium">
+            <span className="text-lg text-gray-900 dark:text-gray-100 font-medium">
               {u.name} — {u.email} — <span className="font-semibold text-indigo-600">{u.role}</span>
             </span>
             <div className="flex gap-3">

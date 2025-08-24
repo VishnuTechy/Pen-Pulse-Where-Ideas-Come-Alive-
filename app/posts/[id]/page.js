@@ -45,10 +45,10 @@ export default function PostDetail() {
         <h1 className="text-3xl md:text-4xl font-extrabold text-center text-blue-700 dark:text-blue-500 mb-4">
           {post.title}
         </h1>
-        <p className="text-center text-gray-600 dark:text-gray-400 text-sm mb-4">
+        <p className="text-center text-gray-900 dark:text-gray-100 text-sm mb-4">
           By {post.author?.name} • {new Date(post.createdAt).toLocaleString()}
         </p>
-        <div className="mt-25 whitespace-pre-wrap min-h-[30vh] text-gray-700 dark:text-gray-300 leading-relaxed text-lg px-10">
+        <div className="mt-25 whitespace-pre-wrap min-h-[30vh] text-gray-900 dark:text-gray-100 leading-relaxed text-lg px-10">
           {post.content}
         </div>
       </div>

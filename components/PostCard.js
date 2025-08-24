@@ -24,7 +24,7 @@ export default function PostCard({ post }) {
           <Link href={`/posts/${post._id}`}>{post.title}</Link>
         </h2>
 
-        <p className="text-gray-600 flex-grow line-clamp-3">
+        <p className="text-gray-900 flex-grow line-clamp-3">
           {post.content}
         </p>
 
