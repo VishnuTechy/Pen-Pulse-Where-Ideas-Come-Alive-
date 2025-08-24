@@ -17,7 +17,7 @@ export default function PostDetail() {
       .then((r) => r.json())
       .then((d) => {
         setPost(d.post);
-        console.log(user, "post", d.post);
+        (user, "post", d.post);
         if (user && d.post && user.id === d.post.author?._id) {
           setIsOwner(true);
         }

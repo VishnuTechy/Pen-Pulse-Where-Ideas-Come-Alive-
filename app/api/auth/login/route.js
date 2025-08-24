@@ -8,7 +8,7 @@ export async function POST(req) {
   if (!email || !password) return new Response(JSON.stringify({ message: 'Missing fields' }), { status: 400 })
   await connectDB()
   const user = await User.findOne({ email })
-  console.log(user)
+  (user)
   if (!user) return new Response(JSON.stringify({ message: 'Invalid credentials' }), { status: 401 })
   const ok = await bcrypt.compare(password, user.passwordHash)
   if (!ok) return new Response(JSON.stringify({ message: 'Invalid credentials' }), { status: 401 })

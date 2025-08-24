@@ -10,7 +10,7 @@ async function getPosts(searchParams) {
   if (searchParams?.limit) url.searchParams.set("limit", searchParams.limit);
   const res = await fetch(url, { cache: "no-store" });
   const data = await res.json();
-    console.log(data)
+    (data)
   return data;
 
 }
