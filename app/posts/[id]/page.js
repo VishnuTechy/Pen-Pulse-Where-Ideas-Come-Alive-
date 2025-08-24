@@ -11,6 +11,9 @@ export default function PostDetail() {
   const [post, setPost] = useState(null);
   const { user } = useAuth(); // Access the current user from AuthContext
   const [isOwner, setIsOwner] = useState(false);
+  const [comments, setComments] = useState([]);
+  const [newComment, setNewComment] = useState("");
+
   useEffect(() => {
     if (!id) return;
     fetch("/api/posts/" + id)
@@ -24,7 +27,28 @@ export default function PostDetail() {
           setIsOwner(true);
         }
       });
+    fetch(`/api/posts/${id}/comments`)
+      .then((r) => r.json())
+      .then((data) => setComments(data.comments || []));
   }, [id]);
+
+  async function addComment() {
+    if (!newComment.trim()) return;
+
+    const res = await fetch(`/api/posts/${id}/comments`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ content: newComment }),
+    });
+
+    if (res.ok) {
+      const comment = await res.json();
+      setComments([comment, ...comments]);
+      setNewComment("");
+    } else {
+      alert("Failed to add comment");
+    }
+  }
 
   async function remove() {
     if (!confirm("Delete post?")) return;
@@ -51,22 +75,61 @@ export default function PostDetail() {
           {post.content}
         </div>
       </div>
+      <div className="mt-10 px-10">
+        <h3 className="text-xl font-bold mb-4">Comments</h3>
+
+        {comments.length === 0 && <p>No comments yet.</p>}
+
+        <ul className="space-y-4">
+          {comments.map((c) => (
+            <li
+              key={c._id}
+              className="bg-gray-100 dark:bg-gray-700 p-4 rounded-xl"
+            >
+              <p className="text-sm font-semibold">{c.user.name}</p>
+              <p className="text-gray-900 dark:text-gray-100">{c.content}</p>
+              <p className="text-xs text-gray-500">
+                {new Date(c.createdAt).toLocaleString()}
+              </p>
+            </li>
+          ))}
+        </ul>
+
+        {user && (
+          <div className="mt-4 flex space-x-2">
+            <input
+              type="text"
+              className="flex-1 border rounded-lg p-2 text-lg"
+              placeholder="Write a comment..."
+              value={newComment}
+              onChange={(e) => setNewComment(e.target.value)}
+            />
+            <button
+              onClick={addComment}
+              className="bg-blue-600 text-white px-4 py-2 rounded-xl"
+            >
+              Post
+            </button>
+          </div>
+        )}
+      </div>
+
       <div className="bg-gray-50 dark:bg-gray-800 px-6 py-4 md:px-8 md:py-6 flex justify-end items-center">
-        {isOwner && ( // Conditionally render the buttons
-          <>
+        {isOwner && (
+          <div className="mt-10 flex flex-col md:flex-row justify-end gap-3 w-full">
             <Link
               href={`/posts/edit/${post._id}`}
-              className="bg-blue-600 hover:bg-blue-700 dark:bg-blue-800 dark:hover:bg-blue-900 text-white font-bold py-2 px-4 rounded-xl mr-2 transition-colors"
+              className="bg-blue-600 hover:bg-blue-700 text-white  py-2 px-5 rounded-xl transition-colors text-center w-full md:w-auto"
             >
               Edit
             </Link>
             <button
               onClick={remove}
-              className="bg-red-500 hover:bg-red-700 dark:bg-red-800 dark:hover:bg-red-900 text-white font-bold py-2 px-4 rounded-xl transition-colors"
+              className="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-5 rounded-xl transition-colors text-center w-full md:w-auto"
             >
               Delete
             </button>
-          </>
+          </div>
         )}
       </div>
     </article>
