@@ -9,7 +9,6 @@ export default function MyBlogsPage() {
     async function fetchMyPosts() {
       const res = await fetch("/api/posts/me", { credentials: "include" }); 
       const data = await res.json();
-      (data)
       setPosts(data.posts || []);
     }
     fetchMyPosts();

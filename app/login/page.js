@@ -17,7 +17,6 @@ export default function Login() {
     })
      if (res.ok) {
       const userData = await res.json();
-      (userData)
       login(userData); // Update the auth context
       router.push('/');
     }

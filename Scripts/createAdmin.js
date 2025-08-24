@@ -4,7 +4,6 @@ import User from "../models/User.js";
 const MONGO_URI = process.env.MONGO_URI;
 
 async function createAdmin() {
-  (MONGO_URI);
   await mongoose.connect("mogo_db_url_here");
   const passwordHash = await bcrypt.hash("Admin@123", 10);
   await User.create({
@@ -14,7 +13,6 @@ async function createAdmin() {
     passwordHash: passwordHash, // <-- changed to passwordHash
     role: "admin"
   });
-  ("Admin created");
   await mongoose.disconnect();
 }
 createAdmin();

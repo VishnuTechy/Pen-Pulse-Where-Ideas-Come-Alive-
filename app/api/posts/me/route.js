@@ -5,9 +5,7 @@ import { verifyToken } from "../../../../utils/auth";
 
 export async function GET() {
   try {
-        ("1111");
     await connectDB();
-    ("1111");
     // read token from cookies
     const token = cookies().get("token")?.value;
     const data = verifyToken(token || "");
