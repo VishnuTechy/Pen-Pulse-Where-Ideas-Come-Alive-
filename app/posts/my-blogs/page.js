@@ -1,18 +1,33 @@
-'use client';
+"use client";
 import { useEffect, useState } from "react";
 import PostCard from "../../../components/PostCard";
 
 export default function MyBlogsPage() {
   const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState(true); // ← loading state
 
   useEffect(() => {
     async function fetchMyPosts() {
-      const res = await fetch("/api/posts/me", { credentials: "include" }); 
-      const data = await res.json();
-      setPosts(data.posts || []);
+      try {
+        const res = await fetch("/api/posts/me", { credentials: "include" });
+        const data = await res.json();
+        setPosts(data.posts || []);
+      } catch (err) {
+        console.error(err);
+      } finally {
+        setLoading(false);
+      }
     }
     fetchMyPosts();
   }, []);
+
+  if (loading) {
+    return (
+      <main className="max-w-6xl mx-auto px-4 py-10 min-h-screen flex justify-center items-center">
+        <p className="text-gray-500 text-lg">Loading your blogs...</p>
+      </main>
+    );
+  }
 
   return (
     <main className="max-w-6xl mx-auto px-4 py-10 relative min-h-screen">
