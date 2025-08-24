@@ -2,7 +2,7 @@ import { connectDB } from '../../../../lib/db'
 import Post from '../../../../models/Post'
 import { cookies } from 'next/headers'
 import { verifyToken } from '../../../../utils/auth'
-
+import Comment from "../../../../models/Comments";
 export async function GET(_req, { params }) {
   await connectDB()
   const post = await Post.findById(params.id).populate('author', 'name email')
@@ -39,5 +39,6 @@ export async function DELETE(_req, { params }) {
     return new Response(JSON.stringify({ message: 'Forbidden' }), { status: 403 })
   }
   await post.deleteOne()
+  await Comment.deleteMany({ post: params.id });
   return new Response(JSON.stringify({ ok: true }), { status: 200 })
 }
