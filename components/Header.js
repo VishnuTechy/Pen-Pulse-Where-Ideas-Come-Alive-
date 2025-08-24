@@ -1,4 +1,3 @@
-// filepath: components/Header.js
 'use client';
 import Link from 'next/link';
 import { useAuth } from '../app/context/AuthContext';
@@ -7,31 +6,73 @@ export default function Header() {
   const { user, logout } = useAuth();
 
   return (
-    <div className="flex items-center justify-between py-4 px-6">
-      <h1 className="text-xl font-bold">
-        <Link href="/">NextBlog</Link>
-      </h1>
-      <nav className="space-x-4">
-        <Link href="/">Home</Link>
-        {user ? (
-          <>
-            <Link href="/posts/create">Create</Link>
-            <Link href="/profile">Profile</Link>
-            {user.role === 'admin' && <Link href="/admin">Admin</Link>}
-            <button
-              onClick={logout}
-              className="ml-2 bg-gray-200 px-2 py-1 rounded hover:bg-gray-300"
-            >
-              Logout
-            </button>
-          </>
-        ) : (
-          <>
-            <Link href="/login">Login</Link>
-            <Link href="/register">Register</Link>
-          </>
-        )}
-      </nav>
-    </div>
+    <header className="bg-white dark:bg-gray-900 shadow-md">
+      <div className="w-full flex items-center justify-between py-6 px-10">
+        {/* Logo */}
+        <h1 className="text-3xl md:text-4xl font-extrabold tracking-tight">
+          <Link
+            href="/"
+            className="bg-gradient-to-r from-blue-500 to-purple-600 bg-clip-text text-transparent hover:opacity-80 transition duration-200"
+          >
+            Pen & Pulse
+          </Link>
+        </h1>
+
+        {/* Nav */}
+        <nav className="space-x-6 flex items-center text-lg font-semibold text-gray-700 dark:text-gray-300">
+          <Link
+            href="/"
+            className="hover:text-blue-600 dark:hover:text-blue-400 transition"
+          >
+            Home
+          </Link>
+          {user ? (
+            <>
+              <Link
+                href="/posts/create"
+                className="hover:text-blue-600 dark:hover:text-blue-400 transition"
+              >
+                Create
+              </Link>
+              <Link
+                href="/profile"
+                className="hover:text-blue-600 dark:hover:text-blue-400 transition"
+              >
+                Profile
+              </Link>
+              {user.role === 'admin' && (
+                <Link
+                  href="/admin"
+                  className="hover:text-blue-600 dark:hover:text-blue-400 transition"
+                >
+                  Admin
+                </Link>
+              )}
+              <button
+                onClick={logout}
+                className="ml-6 bg-gradient-to-r from-red-500 to-pink-600 text-white px-5 py-2.5 rounded-xl shadow-md hover:scale-105 transition duration-200"
+              >
+                Logout
+              </button>
+            </>
+          ) : (
+            <>
+              <Link
+                href="/login"
+                className="hover:text-blue-600 dark:hover:text-blue-400 transition"
+              >
+                Login
+              </Link>
+              <Link
+                href="/register"
+                className="hover:text-blue-600 dark:hover:text-blue-400 transition"
+              >
+                Register
+              </Link>
+            </>
+          )}
+        </nav>
+      </div>
+    </header>
   );
 }

@@ -1,34 +1,43 @@
-'use client'
-import { useEffect, useState } from 'react'
-import { useParams, useRouter } from 'next/navigation'
-import Link from 'next/link'
-import { useAuth } from '../../context/AuthContext' // Import the AuthContext
+"use client";
+import { useEffect, useState } from "react";
+import { useParams, useRouter } from "next/navigation";
+import Link from "next/link";
+import { useAuth } from "../../context/AuthContext"; // Import the AuthContext
 
 export default function PostDetail() {
-  const params = useParams()
-  const router = useRouter()
-  const id = params?.id
-  const [post, setPost] = useState(null)
-  const { user } = useAuth() // Access the current user from AuthContext
-
+  const params = useParams();
+  const router = useRouter();
+  const id = params?.id;
+  const [post, setPost] = useState(null);
+  const { user } = useAuth(); // Access the current user from AuthContext
+  const [isOwner, setIsOwner] = useState(false);
   useEffect(() => {
     if (!id) return;
-    fetch('/api/posts/' + id).then(r => r.json()).then(d => setPost(d.post))
-  }, [id])
+    fetch("/api/posts/" + id)
+      .then((r) => r.json())
+      .then((d) => {
+        setPost(d.post);
+        console.log(user, "post", d.post);
+        if (user && d.post && user.id === d.post.author?._id) {
+          setIsOwner(true);
+        }
+        if (user && user.role === "admin") {
+          setIsOwner(true);
+        }
+      });
+  }, [id]);
 
   async function remove() {
-    if (!confirm('Delete post?')) return;
-    const res = await fetch('/api/posts/' + id, { method: 'DELETE' })
-    if (res.ok) router.push('/')
+    if (!confirm("Delete post?")) return;
+    const res = await fetch("/api/posts/" + id, { method: "DELETE" });
+    if (res.ok) router.push("/");
     else {
-      const j = await res.json().catch(()=>({}))
-      alert(j.message || 'Error')
+      const j = await res.json().catch(() => ({}));
+      alert(j.message || "Error");
     }
   }
 
-  if (!post) return <p>Loading...</p>
-
-  const isOwner = user && post && post.author?._id === user._id // Check if the current user is the author
+  if (!post) return <p>Loading...</p>;
 
   return (
     <article className="card bg-white shadow-xl rounded-2xl overflow-hidden mx-auto max-w-2xl my-8 md:my-12 min-h-[60vh] min-w-[60vw]">
@@ -62,5 +71,5 @@ export default function PostDetail() {
         )}
       </div>
     </article>
-  )
+  );
 }

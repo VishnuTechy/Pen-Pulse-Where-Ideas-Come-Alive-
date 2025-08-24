@@ -9,6 +9,6 @@ export async function GET() {
   const data = verifyToken(token || '')
   if (!data) return new Response(JSON.stringify({ message: 'Unauthorized' }), { status: 401 })
   if (data.role !== 'admin') return new Response(JSON.stringify({ message: 'Forbidden' }), { status: 403 })
-  const users = await User.find().select('-passwordHash')
+  const users = await User.find({ role: 'user' }).select('-passwordHash') // <-- only users with role 'user'
   return new Response(JSON.stringify({ users }), { status: 200 })
 }

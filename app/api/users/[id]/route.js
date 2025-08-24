@@ -1,5 +1,6 @@
 import { connectDB } from '../../../../lib/db'
 import User from '../../../../models/User'
+import Post from '../../../../models/Post'
 import { cookies } from 'next/headers'
 import { verifyToken } from '../../../../utils/auth'
 
@@ -29,6 +30,7 @@ export async function DELETE(_req, { params }) {
   const [_, err] = await requireAdmin(); if (err) return err
   const user = await User.findById(params.id)
   if (!user) return new Response(JSON.stringify({ message: 'Not found' }), { status: 404 })
+  await Post.deleteMany({ author: user._id }) // <-- delete all posts by user
   await user.deleteOne()
   return new Response(JSON.stringify({ ok: true }), { status: 200 })
 }
