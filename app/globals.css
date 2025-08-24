@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply bg-gray-50 text-gray-800;
+  font-family: 'Inter', sans-serif;
+}
+
+.container { max-width: 900px; margin: 0 auto; padding: 1.25rem; }
+a { @apply text-blue-700; }
+button { @apply rounded px-3 py-2; }
+input, textarea { @apply border rounded p-2 w-full; }
+label { @apply block mb-2; }
+.card { @apply bg-white p-4 rounded shadow; }
+h1,h2,h3 { @apply text-gray-900; }
