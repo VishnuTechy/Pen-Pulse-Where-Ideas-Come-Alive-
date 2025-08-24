@@ -5,7 +5,7 @@ const MONGO_URI = process.env.MONGO_URI;
 
 async function createAdmin() {
   (MONGO_URI);
-  await mongoose.connect("mongodb+srv://vishnuharikrishnan12:6JgtH5qfrzyYn2kc@cluster0.mmkmecg.mongodb.net/blog-app?retryWrites=true&w=majority&appName=Cluster0");
+  await mongoose.connect("mogo_db_url_here");
   const passwordHash = await bcrypt.hash("Admin@123", 10);
   await User.create({
     name: "SuperAdmin",
