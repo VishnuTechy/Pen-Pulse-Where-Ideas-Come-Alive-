@@ -11,7 +11,6 @@ async function getPosts(searchParams) {
   const res = await fetch(url, { cache: "no-store" });
   const data = await res.json();
   return data;
-
 }
 
 export default function Home({ searchParams }) {
@@ -19,25 +18,34 @@ export default function Home({ searchParams }) {
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [q, setQ] = useState(searchParams?.q || "");
+  const [loading, setLoading] = useState(true); // ✅ loading state
 
   useEffect(() => {
     async function loadPosts() {
+      setLoading(true); // start loading
       const { posts = [], page = 1, totalPages = 1 } = await getPosts(searchParams);
       setPosts(posts);
       setPage(page);
       setTotalPages(totalPages);
       setQ(searchParams?.q || "");
+      setLoading(false); // stop loading
     }
 
     loadPosts();
   }, [searchParams]);
 
+  if (loading) {
+    return (
+      <main className="relative z-10 max-w-6xl mx-auto px-4 py-10 min-h-screen flex justify-center items-center">
+        <p className="text-gray-500 text-lg">Loading posts...</p>
+      </main>
+    );
+  }
+
   return (
     <div className="relative min-h-screen">
       {/* Background Hero Section */}
-      <div className="absolute inset-0">
-
-      </div>
+      <div className="absolute inset-0"></div>
 
       {/* Page Content */}
       <main className="relative z-10 max-w-6xl mx-auto px-4 py-10">
@@ -55,7 +63,6 @@ export default function Home({ searchParams }) {
             Search
           </button>
         </form>
-
 
         {/* Posts Grid */}
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
