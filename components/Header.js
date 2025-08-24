@@ -26,8 +26,17 @@ export default function Header() {
           >
             Home
           </Link>
+
           {user ? (
             <>
+              {/* My Blogs visible only when logged in */}
+              <Link
+                href="/posts/my-blogs"
+                className="hover:text-blue-600 dark:hover:text-blue-400 transition"
+              >
+                My Blogs
+              </Link>
+
               <Link
                 href="/posts/create"
                 className="hover:text-blue-600 dark:hover:text-blue-400 transition"
@@ -40,6 +49,7 @@ export default function Header() {
               >
                 Profile
               </Link>
+
               {user.role === 'admin' && (
                 <Link
                   href="/admin"
@@ -48,6 +58,7 @@ export default function Header() {
                   Admin
                 </Link>
               )}
+
               <button
                 onClick={logout}
                 className="ml-6 bg-gradient-to-r from-red-500 to-pink-600 text-white px-5 py-2.5 rounded-xl shadow-md hover:scale-105 transition duration-200"

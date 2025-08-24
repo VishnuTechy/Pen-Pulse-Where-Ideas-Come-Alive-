@@ -43,17 +43,20 @@ export default function Home({ searchParams }) {
       {/* Page Content */}
       <main className="relative z-10 max-w-6xl mx-auto px-4 py-10">
         {/* Search Bar */}
-        <form action="/" className="mb-6 flex gap-2">
+        <form action="/" className="mb-10 flex items-center gap-3 justify-center">
           <input
             name="q"
-            placeholder="Search by title or author..."
+            placeholder="🔍 Search blogs by title or author..."
             defaultValue={q}
-            className="flex-1 px-3 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500"
+            className="flex-1 max-w-xl px-4 py-3 rounded-xl border border-gray-300 shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
           />
-          <button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
+          <button
+            className="px-5 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white font-medium rounded-xl shadow-md hover:scale-105 transition duration-200"
+          >
             Search
           </button>
         </form>
+
 
         {/* Posts Grid */}
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">

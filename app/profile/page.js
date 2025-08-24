@@ -43,7 +43,7 @@ export default function Profile() {
   }
 
   return (
-    <div className="max-w-2xl mx-auto p-6">
+    <div className=" min-h-screen  max-w-2xl mx-auto p-6">
       <h2 className="text-3xl font-extrabold mb-6 text-blue-600 dark:text-blue-400">Profile</h2>
 
       {/* Profile Card */}
